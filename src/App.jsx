@@ -69,17 +69,14 @@ function App() {
 	if (gameOverStatus) {
 		return (
 			<div>
-				<h1>Game Over</h1>
-				<p>
-					Your final score is {score}.
-				</p>
+
 			</div>
 		);
 	}
 	if (!gameOverStatus) {
 		return (
-			<div>
-				<h1 className='text-2xl text-cen'>Country Sim Game</h1>
+			<div className='p-10'>
+				<h1 className='text-2xl text-center'>Country Sim Game</h1>
 			</div>
 		);
 	}
