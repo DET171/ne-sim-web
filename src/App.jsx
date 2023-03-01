@@ -217,9 +217,9 @@ const App = ({ options }) => {
 		<>
 			{
 				!gameOverStatus && <>
-					<div>
+					<div className='p-10 w-4/5 m-auto'>
 						<p>
-							NE Country Sim
+							<h1 className='text-2xl text-center font-bold'>NE Country Sim</h1>
 
 							<br />
 
@@ -231,7 +231,7 @@ const App = ({ options }) => {
 
 							<br />
 
-							Happiness: {
+							{/* Happiness: {
 								happiness > 700 ? (
 									<p color='green'>[{
 										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
@@ -241,7 +241,25 @@ const App = ({ options }) => {
 										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
 									}] {Math.floor(happiness)}/1000</p>
 								)
-							}
+							} */}
+							{/* port the above to a div with a coloured background */}
+							<div className='mt-5'>
+								Happiness:
+								<div className='w-full h-5 bg-gray-300 rounded-lg'>
+									<div
+										className='w-full h-5 rounded-lg'
+										style={{
+											backgroundColor: happiness > 700 ? 'green' : 'red',
+											width: `${Math.floor(happiness / 10)}%`,
+											transitionDuration: '1s',
+										}}
+									/>
+									{/* show happiness in the bar */}
+									<div className='absolute text-white text-xs font-bold w-full text-center top-[-5]'>
+										{Math.floor(happiness)}/1000
+									</div>
+								</div>
+							</div>
 
 							<br />
 
