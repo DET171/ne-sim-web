@@ -113,7 +113,7 @@ const App = ({ options }) => {
 		// setHappiness((happiness) => happiness += 100);
 
 		setHappiness((preHappiness) => {
-			return decreaseNumberbyXPercent(preHappiness + 40, 0.5);
+			return decreaseNumberbyXPercent(preHappiness + 40, 0.01);
 		});
 
 		// increase infrastructure expenses by 100 billion
