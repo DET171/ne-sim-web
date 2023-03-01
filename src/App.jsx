@@ -231,17 +231,6 @@ const App = ({ options }) => {
 
 							<br />
 
-							{/* Happiness: {
-								happiness > 700 ? (
-									<p color='green'>[{
-										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
-									}] {Math.floor(happiness)}/1000</p>
-								) : (
-									<p color='red'>[{
-										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
-									}] {Math.floor(happiness)}/1000</p>
-								)
-							} */}
 							{/* port the above to a div with a coloured background */}
 							<div className='mt-5'>
 								Happiness:
