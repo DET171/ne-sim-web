@@ -79,10 +79,6 @@ const App = ({ options }) => {
 			Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10)
 		}`);
 	};
-	const govtOverthrown = () => {
-		setGameOverStatus(true);
-		console.log('You lost! Your happiness level is too low!');
-	};
 
 	const setGDPAndRevenue = (year) => {
 		// only run on the first day of the year
@@ -122,10 +118,6 @@ const App = ({ options }) => {
 	// increase day by one every 300ms
 	useEffect(() => {
 		const interval = setInterval(() => {
-			if (happiness < 500) {
-				govtOverthrown();
-			}
-
 			setGDPAndRevenue(date);
 
 			// budget deficit event on 2019-06-26, decrease happiness by a random 12-15%
@@ -213,6 +205,30 @@ const App = ({ options }) => {
 
 	const daysSinceStartOfYear = (+new Date(date) - +new Date(date.getFullYear(), 0, 1)) / (1000 * 60 * 60 * 24);
 
+	if (happiness < 500) {
+		return (
+			<div className='p-10 w-4/5 m-auto'>
+				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
+				<br />
+				<p>
+					Your happiness is too low! You have been overthrown!
+				</p>
+			</div>
+		);
+	}
+
+	if (gameOverStatus) {
+		return (
+			<div className='p-10 w-4/5 m-auto'>
+				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
+				<br />
+				<p>
+					Your score is {Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10)}
+				</p>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			{
@@ -233,10 +249,10 @@ const App = ({ options }) => {
 
 							{/* port the above to a div with a coloured background */}
 							<div className='mt-5'>
-								Happiness:
-								<div className='w-full h-5 bg-gray-300 rounded-lg'>
+								<div className='w-full h-8 bg-gray-300 rounded-lg'>
 									<div
-										className='w-full h-5 rounded-lg'
+										// position the bar 10px above
+										className='w-full h-8 rounded-lg'
 										// move the number into the bar
 										style={{
 											backgroundColor: happiness > 700 ? 'green' : 'red',
@@ -245,74 +261,98 @@ const App = ({ options }) => {
 
 										}}
 									/>
-									{/* show happiness in the bar */}
-									<p className='absolute text-white text-xs font-bold w-full text-center top-[-5]'>
-										{Math.floor(happiness)}/1000
-									</p>
+									<p className='relative -top-7 w-full text-center text-white'>Happiness: {Math.round(happiness)}/1000</p>
 								</div>
 							</div>
-
-							<br />
-
-							GDP: {GDP} billion
 						</p>
 
-						<p>
-							Budget:
-							<br />
-							Revenue (accumulated): {(+(revenue / 365 * daysSinceStartOfYear) + baseRevenue).toFixed(2)} billion
-							<br />
-							Revenue (this year): {+(revenue / 365 * daysSinceStartOfYear).toFixed(2)} billion
-							<br />
-							Expenses (accumulated): {(+(expenses / 365 * daysSinceStartOfYear) + baseExpenses + infrastructureExpenses).toFixed((2))} billion
-							<br />
-							Expenses (this year): {+(expenses / 365 * daysSinceStartOfYear).toFixed(2)} billion
-							<br />
-							Net: {(+(((baseRevenue + revenue) - (baseExpenses + expenses)) / 365 * daysSinceStartOfYear).toFixed(2) - infrastructureExpenses)
-								.toFixed(2)} billion
-							<br />
-							Days since start of year: {daysSinceStartOfYear}
-						</p>
-					</div>
-					<div>
-						<p>
-							{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && (
-								<>
-									<button
-										className='text-white bg-red-700'
+						<div className='mt-5 h-screen'>
+							<div>
+								{/* Budget:
+									<br />
+									Revenue (accumulated): {(+(revenue / 365 * daysSinceStartOfYear) + baseRevenue).toFixed(2)} billion
+									<br />
+									Revenue (this year): {+(revenue / 365 * daysSinceStartOfYear).toFixed(2)} billion
+									<br />
+									Expenses (accumulated): {(+(expenses / 365 * daysSinceStartOfYear) + baseExpenses + infrastructureExpenses).toFixed((2))} billion
+									<br />
+									Expenses (this year): {+(expenses / 365 * daysSinceStartOfYear).toFixed(2)} billion
+									<br />
+									Net: {(+(((baseRevenue + revenue) - (baseExpenses + expenses)) / 365 * daysSinceStartOfYear).toFixed(2) - infrastructureExpenses)
+										.toFixed(2)} billion
+									<br /> */}
+
+								<table className='w-full'>
+									<tr>
+										<th colSpan={3}>Budget (yearly)</th>
+										<th colSpan={3}>Budget (accumulated)</th>
+									</tr>
+									<tr>
+										<th>GDP</th>
+										<th>Revenue</th>
+										<th>Expenses</th>
+										<th>Revenue</th>
+										<th>Expenses</th>
+										<th>Net</th>
+									</tr>
+									<tr>
+										<td>
+											{GDP} billion
+										</td>
+										<td>
+											{+(revenue / 365 * daysSinceStartOfYear).toFixed(2)} billion
+										</td>
+										<td>
+											{+(expenses / 365 * daysSinceStartOfYear).toFixed(2)} billion
+										</td>
+										<td>
+											{(+(revenue / 365 * daysSinceStartOfYear) + baseRevenue).toFixed(2)} billion
+										</td>
+										<td>
+											{(+(expenses / 365 * daysSinceStartOfYear) + baseExpenses + infrastructureExpenses).toFixed((2))} billion
+										</td>
+										<td>
+											{(+(((baseRevenue + revenue) - (baseExpenses + expenses)) / 365 * daysSinceStartOfYear) - infrastructureExpenses).toFixed(2)} billion
+										</td>
+									</tr>
+								</table>
+								<p className='mt-7'>Days since start of year: {daysSinceStartOfYear}</p>
+							</div>
+
+							<div className='columns-2 mt-7 h-screen'>
+								<div className='w-1/2 h-full'>
+									<h3 className='text-xl font-bold'>Event/Activity logs</h3>
+									{activityLog
+										.slice(0, 5)
+										.map((log, index) => (
+											<p key={index}>{log}</p>
+										))}
+
+								</div>
+								<div>
+									{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && <button
+										className='text-white bg-red-600 p-5 rounded-lg'
 										onClick={() => {
 											giveReliefFunds();
 										}}
 									>{
-										date.getFullYear() !== 2023 ? (
-											//add buttons to give funds and subsidies
+											date.getFullYear() !== 2023 ? (
+											// add buttons to give funds and subsidies
+												'Provide relief measures like relief funds, GST vouchers and worker wage subsidies'
+											) : (
+												'Provide subsidies like subsidising BTO for 1st time buyers, baby bonuses, and car taxes and tobacco tax'
+											)
+										} (cost: 100 billion)
+									</button>}
+								</div>
+							</div>
+						</div>
 
-											
-											'Provide relief measures like relief funds, GST vouchers and worker wage subsidies'
-										) : (
-											'Provide subsidies like subsidising BTO for 1st time buyers, baby bonuses, and car taxes and tobacco tax'
-										)
-									} (cost: 100 billion)
-									</button>
 
-								</>
-							)}
-						</p>
+						<div>
 
-						<p>
-							<br />
-							Events/Activity logs
-							<br />
-							{activityLog
-								// first 10 items only
-								.slice(0, 10)
-								.map((log, index) => (
-									<Fragment key={index}>
-										{log}
-										<br />
-									</Fragment>
-								))}
-						</p>
+
+						</div>
 					</div>
 
 				</>
