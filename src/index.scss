@@ -4,7 +4,11 @@
 
 // first of all create drop down bar, change fonts, background shld be blurred image, include score count, make event and activity log bigger
 html, body {
-	overflow-x: hidden;
+	@apply font-golos-text #{!important};
+}
+
+button {
+	@apply font-golos-text #{!important};
 }
 
 table, tr, td, th {

@@ -7,8 +7,9 @@ module.exports = {
 	theme: {
 		extend: {},
 		fontFamily: {
-			'tilt-warp': ['Regular 400', 'sans-serif'],
-		}
+			'tilt-warp': ['"Tilt Warp"', 'cursive'],
+			'golos-text': ['"Golos Text"', 'sans-serif'],
+		},
 	},
 	plugins: [],
 };

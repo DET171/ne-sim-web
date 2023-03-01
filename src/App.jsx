@@ -310,12 +310,6 @@ const App = ({ options }) => {
 		<>
 			{
 				!gameOverStatus && <>
-					<>
-						<link rel="preconnect" href="https://fonts.googleapis.com"/>
-						<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-						<link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet"/>
-					</>
-				
 					<div className='p-10 w-4/5 m-auto'>
 						<p>
 							<h1 className='text-4xl text-center font-tilt-warp font-bold 36px'>NE Country Sim</h1>
@@ -349,7 +343,7 @@ const App = ({ options }) => {
 							</div>
 						</p>
 
-						<div className='mt-5 h-screen'>
+						<div className='mt-5'>
 							<div>
 								<table className='w-full'>
 									<tr>
@@ -388,9 +382,9 @@ const App = ({ options }) => {
 								<p className='mt-7'>Days since start of year: {daysSinceStartOfYear}</p>
 							</div>
 
-							<div className='grid grid-cols-2 mt-7 h-screen'>
+							<div className='grid grid-cols-2 mt-7'>
 								<div className=''>
-									<h3 className='text-xl font-bold'>Event/Activity logs</h3>
+									<h3 className='text-xl font-tilt-warp'>Event/Activity logs</h3>
 									{activityLog
 										.slice(0, 5)
 										.map((log, index) => (

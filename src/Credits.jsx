@@ -6,7 +6,7 @@ function Credits() {
 
 	return (
 		<>
-			<Button onClick={() => setOpen(true)}></Button>
+			<Button color='blue' onClick={() => setOpen(true)} circular className='fixed bottom-2 right-2' icon='question'></Button>
 			<Modal
 				onClose={() => setOpen(false)}
 				onOpen={() => setOpen(true)}
@@ -15,9 +15,15 @@ function Credits() {
 				<Modal.Header>Credits</Modal.Header>
 				<Modal.Content>
 					<Modal.Description>
-						<Header>Default Profile Image</Header>
 						<p>
-						Credits
+							Game made by EC<sup>3</sup>, specifically Du Yuancheng and Darryl Shi (both 2i2)
+							<br></br>
+							We don't talk about An Yi
+
+
+							<br></br>
+							<br></br>
+							Commissioned by the NE Council
 						</p>
 					</Modal.Description>
 				</Modal.Content>
