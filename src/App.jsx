@@ -1,20 +1,10 @@
+/* eslint-disable react/prop-types */
 import React, { FC, Fragment, useEffect, useState } from 'react';
 import { Box, Newline, Spacer, Text, useApp, useInput } from 'ink';
 
-const App: FC<{
-	options: {
-		instructions: boolean | undefined;
-		credits: boolean | undefined;
-	}
-}> = ({ options }) => {
+const App = ({ options }) => {
 	const { exit } = useApp();
-	const valueMap: {
-		[key]: {
-			GDP;
-			revenue;
-			expenses;
-		}
-	} = {
+	const valueMap = {
 		2019: {
 			GDP: 514.1,
 			revenue: 74.7,
@@ -101,7 +91,6 @@ const App: FC<{
 	const setGDPAndRevenue = (year) => {
 		// only run on the first day of the year
 
-		/* eslint-disable @typescript-eslint/no-non-null-assertion */
 		if (year.getDate() === 1 && year.getMonth() === 0) {
 			setGDP(valueMap[year.getFullYear()]?.GDP);
 			setRevenue(valueMap[year.getFullYear()]?.revenue);
@@ -109,7 +98,7 @@ const App: FC<{
 			setExpenses(valueMap[year.getFullYear()]?.expenses);
 			setBaseExpenses(preBaseExpenses => preBaseExpenses + (valueMap[year.getFullYear() - 1]?.expenses ?? 0));
 		}
-		/* eslint-enable @typescript-eslint/no-non-null-assertion */
+
 	};
 
 	const decreaseNumberbyXPercent = (number, percent) => {
@@ -132,7 +121,6 @@ const App: FC<{
 		// increase infrastructure expenses by 100 billion
 		setInfrastructureExpenses((preExpenses) => preExpenses + 100);
 	};
-
 
 
 	// increase day by one every 300ms
@@ -273,11 +261,11 @@ const App: FC<{
 
 							Happiness: {
 								happiness > 700 ? (
-									<Text color="green">[{
+									<Text color='green'>[{
 										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
 									}] {Math.floor(happiness)}/1000</Text>
 								) : (
-									<Text color="red">[{
+									<Text color='red'>[{
 										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
 									}] {Math.floor(happiness)}/1000</Text>
 								)
