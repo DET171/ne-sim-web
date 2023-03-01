@@ -103,7 +103,7 @@ const App = ({ options }) => {
 	};
 
 	// start date: 2019-01-01
-	const [date, setDate] = useState(new Date(2023, 0, 1));
+	const [date, setDate] = useState(new Date(2019, 6, 1));
 
 
 	const giveReliefFunds = () => {
@@ -226,7 +226,6 @@ const App = ({ options }) => {
 
 	if (gameOverStatus) {
 		const score = Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10);
-		console.log(happiness, revenue, baseExpenses, baseRevenue, expenses, GDP, infrastructureExpenses);
 		return (
 			<div className='p-10 w-4/5 m-auto'>
 				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
@@ -238,7 +237,7 @@ const App = ({ options }) => {
 					{
 						// SHA-256 of score
 						// eslint-disable-next-line max-len
-						sha256('' + score).toString()
+						sha256(sha256('' + score).toString()).toString()
 					}
 				</p>
 			</div>
