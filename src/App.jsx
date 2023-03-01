@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { FC, Fragment, useEffect, useState } from 'react';
 import sha256 from 'crypto-js/sha256';
+import Credits from './Credits';
 
 const App = ({ options }) => {
 	const valueMap = {
@@ -40,6 +41,7 @@ const App = ({ options }) => {
 	const [hasIncreaseGST, setHasIncreaseGST] = useState(false);
 	const [hasIncreasePropertyTax, setHasIncreasedPropertyTax] = useState(false);
 	const [hasIncreaseAlcoholTax, setHasIncreasedAlcoholTax] = useState(false);
+	const [credits, setCredits] = useState(false);
 	// wrapper for setHappiness to prevent it from going either below 0 or over 1000
 	// take note of the fact that some pass in functions
 	const setHappiness = (newHappiness) => {
@@ -448,9 +450,9 @@ const App = ({ options }) => {
 
 						</div>
 					</div>
-
 				</>
 			}
+
 		</>
 	);
 };
