@@ -91,7 +91,8 @@ const App = ({ options }) => {
 		if (year.getFullYear() > 2023) return;
 
 		// only run on the first day of the year
-		if (year.getDate() === 1 && year.getMonth() === 0) {
+		console.log();
+		if ((year.getDate() === 1 && year.getMonth() === 0) || ((year.getMonth() === 6 && year.getDate() === 1) && year.getFullYear() === 2019)) {
 			setHasSoldBonds(false);
 			setGDP(valueMap[year.getFullYear()]?.GDP);
 			setRevenue(valueMap[year.getFullYear()]?.revenue);
