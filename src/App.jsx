@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { FC, Fragment, useEffect, useState } from 'react';
-import { Box, Newline, Spacer, Text, useApp, useInput } from 'ink';
 
 const App = ({ options }) => {
-	const { exit } = useApp();
 	const valueMap = {
 		2019: {
 			GDP: 514.1,
@@ -80,12 +78,10 @@ const App = ({ options }) => {
 		console.log(`Score: ${
 			Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10)
 		}`);
-		exit();
 	};
 	const govtOverthrown = () => {
 		setGameOverStatus(true);
 		console.log('You lost! Your happiness level is too low!');
-		exit();
 	};
 
 	const setGDPAndRevenue = (year) => {
@@ -215,41 +211,17 @@ const App = ({ options }) => {
 	});
 
 
-	if (options.instructions) {
-		return (
-			<>
-				<Text>Game Instructions</Text>
-				{/* eslint-disable-next-line react/no-unescaped-entities */}
-				<Text>You will be managing Singapore from 2019 - 2023. Your country's happiness level will start at 1000, and you will lose if it goes under 500. You will also lose if your economy or budget becomes too low.</Text>
-				<Text>Certain events, like COVID, are predetermined for you.</Text>
-			</>
-		);
-
-	}
-
-	if (options.credits) {
-		return (
-			<>
-				<Text>Credits</Text>
-				<Text>Game by: HCI EC3</Text>
-				<Text>Frameworks & Libraries used: Ink & React</Text>
-				{/* eslint-disable-next-line react/no-unescaped-entities */}
-				<Text>P.S. We didn't really feel like doing this</Text>
-			</>
-		);
-	}
-
 	const daysSinceStartOfYear = (+new Date(date) - +new Date(date.getFullYear(), 0, 1)) / (1000 * 60 * 60 * 24);
 
 	return (
 		<>
 			{
 				!gameOverStatus && <>
-					<Box>
-						<Text>
+					<div>
+						<p>
 							NE Country Sim
 
-							<Newline />
+							<br />
 
 							Date: {date.toLocaleString('en-us', {
 								month: 'long',
@@ -257,50 +229,50 @@ const App = ({ options }) => {
 								year: 'numeric',
 							})}
 
-							<Newline />
+							<br />
 
 							Happiness: {
 								happiness > 700 ? (
-									<Text color='green'>[{
+									<p color='green'>[{
 										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
-									}] {Math.floor(happiness)}/1000</Text>
+									}] {Math.floor(happiness)}/1000</p>
 								) : (
-									<Text color='red'>[{
+									<p color='red'>[{
 										'#'.repeat(Math.floor(happiness / 10)) + ' '.repeat(100 - Math.floor(happiness / 10))
-									}] {Math.floor(happiness)}/1000</Text>
+									}] {Math.floor(happiness)}/1000</p>
 								)
 							}
 
-							<Newline />
+							<br />
 
 							GDP: {GDP} billion
-						</Text>
-						<Spacer />
-						<Text>
+						</p>
+
+						<p>
 							Budget:
-							<Newline />
+							<br />
 							Revenue (accumulated): {(+(revenue / 365 * daysSinceStartOfYear) + baseRevenue).toFixed(2)} billion
-							<Newline />
+							<br />
 							Revenue (this year): {+(revenue / 365 * daysSinceStartOfYear).toFixed(2)} billion
-							<Newline />
+							<br />
 							Expenses (accumulated): {(+(expenses / 365 * daysSinceStartOfYear) + baseExpenses + infrastructureExpenses).toFixed((2))} billion
-							<Newline />
+							<br />
 							Expenses (this year): {+(expenses / 365 * daysSinceStartOfYear).toFixed(2)} billion
-							<Newline />
+							<br />
 							Net: {(+(((baseRevenue + revenue) - (baseExpenses + expenses)) / 365 * daysSinceStartOfYear).toFixed(2) - infrastructureExpenses)
 								.toFixed(2)} billion
-							<Newline />
+							<br />
 							Days since start of year: {daysSinceStartOfYear}
-						</Text>
-					</Box>
-					<Box>
-						<Text>
-							<Newline />
+						</p>
+					</div>
+					<div>
+						<p>
+							<br />
 							Choose your action:
-							<Newline />
+							<br />
 							{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && (
 								<>
-									<Newline />
+									<br />
 									1. {
 										date.getFullYear() !== 2023 ? (
 											'Provide relief measures like relief funds, GST vouchers and worker wage subsidies'
@@ -310,23 +282,23 @@ const App = ({ options }) => {
 									} (cost: 100 billion)
 								</>
 							)}
-						</Text>
-						<Spacer />
-						<Text>
-							<Newline />
+						</p>
+
+						<p>
+							<br />
 							Events/Activity logs
-							<Newline />
+							<br />
 							{activityLog
 								// first 10 items only
 								.slice(0, 10)
 								.map((log, index) => (
 									<Fragment key={index}>
 										{log}
-										<Newline />
+										<br />
 									</Fragment>
 								))}
-						</Text>
-					</Box>
+						</p>
+					</div>
 
 				</>
 			}
