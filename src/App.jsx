@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { FC, Fragment, useEffect, useState } from 'react';
+import sha256 from 'crypto-js/sha256';
 
 const App = ({ options }) => {
 	const valueMap = {
@@ -102,7 +103,7 @@ const App = ({ options }) => {
 	};
 
 	// start date: 2019-01-01
-	const [date, setDate] = useState(new Date(2019, 0, 1));
+	const [date, setDate] = useState(new Date(2023, 0, 1));
 
 
 	const giveReliefFunds = () => {
@@ -113,7 +114,7 @@ const App = ({ options }) => {
 		// setHappiness((happiness) => happiness += 100);
 
 		setHappiness((preHappiness) => {
-			return decreaseNumberbyXPercent(preHappiness + 40, 0.01);
+			return increaseNumberbyXPercent(preHappiness, 15);
 		});
 
 		// increase infrastructure expenses by 100 billion
@@ -127,14 +128,14 @@ const App = ({ options }) => {
 			setGDPAndRevenue(date);
 
 			// budget deficit event on 2019-06-26, decrease happiness by a random 12-15%
-			if (date.getFullYear() === 2019 && date.getMonth() === 5 && date.getDate() === 26) {
+			if (date.getFullYear() === 2019 && date.getMonth() === 10 && date.getDate() === 26) {
 				setActivityLog((preActivityLog) => ['Budget deficit!', ...preActivityLog]);
 				// decrease happiness by a random 12-15%
 				setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, Math.floor(Math.random() * 4 + 6)));
 			}
 
 			// tap into reserves on 2019-08-09, happiness increases by a random 10-12%
-			if (date.getFullYear() === 2019 && date.getMonth() === 7 && date.getDate() === 9) {
+			if (date.getFullYear() === 2019 && date.getMonth() === 11 && date.getDate() === 9) {
 				setActivityLog((preActivityLog) => ['Tapped into reserves!', ...preActivityLog]);
 				// decrease happiness by a random 12-15%
 
@@ -224,13 +225,21 @@ const App = ({ options }) => {
 	}
 
 	if (gameOverStatus) {
+		const score = Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10);
 		console.log(happiness, revenue, baseExpenses, baseRevenue, expenses, GDP, infrastructureExpenses);
 		return (
 			<div className='p-10 w-4/5 m-auto'>
 				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
 				<br />
 				<p>
-					Your score is {Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10)}
+					Your score is {score}
+				</p>
+				<p>
+					{
+						// SHA-256 of score
+						// eslint-disable-next-line max-len
+						sha256('' + score).toString()
+					}
 				</p>
 			</div>
 		);
