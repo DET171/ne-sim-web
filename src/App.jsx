@@ -310,9 +310,15 @@ const App = ({ options }) => {
 		<>
 			{
 				!gameOverStatus && <>
+					<>
+						<link rel="preconnect" href="https://fonts.googleapis.com"/>
+						<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+						<link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet"/>
+					</>
+				
 					<div className='p-10 w-4/5 m-auto'>
 						<p>
-							<h1 className='text-2xl text-center font-bold'>NE Country Sim</h1>
+							<h1 className='text-4xl text-center font-tilt-warp font-bold 36px'>NE Country Sim</h1>
 
 							<br />
 
