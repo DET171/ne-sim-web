@@ -81,6 +81,7 @@ const App = ({ options }) => {
 	};
 
 	const setGDPAndRevenue = (year) => {
+		if (year.getFullYear() > 2023) return;
 		// only run on the first day of the year
 
 		if (year.getDate() === 1 && year.getMonth() === 0) {
@@ -150,9 +151,9 @@ const App = ({ options }) => {
 			if (date.getFullYear() === 2021 && date.getMonth() === 0 && date.getDate() === 1) {
 				setActivityLog((preActivityLog) => ['New year!', ...preActivityLog]);
 				// decrease happiness by a random 0-3%
-				setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, Math.floor(Math.random() * 4 + 5)));
+				setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, Math.floor(Math.random() * 6 + 15)));
 				// decrease revenue by a random 0-3%
-				setRevenue((preRevenue) => decreaseNumberbyXPercent(preRevenue, Math.floor(Math.random() * 4 + 15)));
+				setRevenue((preRevenue) => decreaseNumberbyXPercent(preRevenue, Math.floor(Math.random() * 6 + 15)));
 
 				setHas2BeenChosen(false);
 			}
@@ -218,6 +219,7 @@ const App = ({ options }) => {
 	}
 
 	if (gameOverStatus) {
+		console.log(happiness, revenue, baseExpenses, baseRevenue, expenses, GDP, infrastructureExpenses);
 		return (
 			<div className='p-10 w-4/5 m-auto'>
 				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
@@ -268,20 +270,6 @@ const App = ({ options }) => {
 
 						<div className='mt-5 h-screen'>
 							<div>
-								{/* Budget:
-									<br />
-									Revenue (accumulated): {(+(revenue / 365 * daysSinceStartOfYear) + baseRevenue).toFixed(2)} billion
-									<br />
-									Revenue (this year): {+(revenue / 365 * daysSinceStartOfYear).toFixed(2)} billion
-									<br />
-									Expenses (accumulated): {(+(expenses / 365 * daysSinceStartOfYear) + baseExpenses + infrastructureExpenses).toFixed((2))} billion
-									<br />
-									Expenses (this year): {+(expenses / 365 * daysSinceStartOfYear).toFixed(2)} billion
-									<br />
-									Net: {(+(((baseRevenue + revenue) - (baseExpenses + expenses)) / 365 * daysSinceStartOfYear).toFixed(2) - infrastructureExpenses)
-										.toFixed(2)} billion
-									<br /> */}
-
 								<table className='w-full'>
 									<tr>
 										<th colSpan={3}>Budget (yearly)</th>
