@@ -310,10 +310,12 @@ const App = ({ options }) => {
 		<>
 			{
 				!gameOverStatus && <>
-					<div className='p-10 w-4/5 m-auto'>
+					<div className='p-10 w-4/5 m-auto bg-yellow-200 min-h-screen'>
 						<p>
-							<h1 className='text-4xl text-center font-tilt-warp font-bold 36px'>NE Country Sim</h1>
+							<h1 className='text-5xl text-center font-tilt-warp font-bold'>NE Country Sim</h1>
 
+							<br />
+							<br />
 							<br />
 
 							Date: {date.toLocaleString('en-us', {
@@ -384,7 +386,7 @@ const App = ({ options }) => {
 
 							<div className='grid grid-cols-2 mt-7'>
 								<div className=''>
-									<h3 className='text-xl font-tilt-warp'>Event/Activity logs</h3>
+									<h3 className='text-2xl font-tilt-warp'>Event/Activity logs</h3>
 									{activityLog
 										.slice(0, 5)
 										.map((log, index) => (
