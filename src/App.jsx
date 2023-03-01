@@ -89,7 +89,7 @@ const App = ({ options }) => {
 			setRevenue(valueMap[year.getFullYear()]?.revenue);
 			setBaseRevenue((preBaseRevenue => preBaseRevenue + (valueMap[year.getFullYear() - 1]?.revenue ?? 0)));
 			setExpenses(valueMap[year.getFullYear()]?.expenses);
-			setBaseExpenses(preBaseExpenses => preBaseExpenses + (valueMap[year.getFullYear() - 1]?.expenses ?? 0));
+			setBaseExpenses((preBaseExpenses => preBaseExpenses + (valueMap[year.getFullYear() - 1]?.expenses ?? 0)));
 		}
 
 	};
@@ -109,7 +109,12 @@ const App = ({ options }) => {
 		// give 100 billion in relief funds
 		setActivityLog((preActivityLog) => ['Gave 100 billion in relief funds!', ...preActivityLog]);
 		// increase happiness by 20%
-		setHappiness((preHappiness) => increaseNumberbyXPercent(preHappiness, 16.5));
+		// eslint-disable-next-line no-shadow
+		// setHappiness((happiness) => happiness += 100);
+
+		setHappiness((preHappiness) => {
+			return decreaseNumberbyXPercent(preHappiness + 40, 0.5);
+		});
 
 		// increase infrastructure expenses by 100 billion
 		setInfrastructureExpenses((preExpenses) => preExpenses + 100);
