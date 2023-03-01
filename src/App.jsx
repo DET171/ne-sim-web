@@ -170,7 +170,7 @@ const App = ({ options }) => {
 			if (date.getFullYear() === 2022 && date.getMonth() === 1 && date.getDate() === 24) {
 				setActivityLog((preActivityLog) => ['Russia invades Ukraine!', ...preActivityLog]);
 				// decrease happiness by a random 13-17%
-				setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, Math.floor(Math.random() * 5 + 13)));
+				setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, Math.floor(Math.random() * 5 + 15)));
 			}
 
 			// decrease happiness by random amount at start of 2023
@@ -326,9 +326,9 @@ const App = ({ options }) => {
 									>{
 											date.getFullYear() !== 2023 ? (
 											// add buttons to give funds and subsidies
-												'Provide relief measures like relief funds, GST vouchers and worker wage subsidies'
+												'Provide relief measures like relief funds, GST vouchers and worker wage subsidies 💸'
 											) : (
-												'Provide subsidies like subsidising BTO for 1st time buyers, baby bonuses, and car taxes and tobacco tax'
+												'Provide subsidies like subsidising BTO for 1st time buyers, baby bonuses, and car taxes and tobacco tax 💸'
 											)
 										} (cost: 100 billion)
 									</button>}
