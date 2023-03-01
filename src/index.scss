@@ -14,3 +14,7 @@ table, tr, td, th {
 th, td {
 	@apply w-1/6;
 }
+
+.action {
+	@apply mt-3 w-full text-white bg-red-600 p-3 rounded-lg hover:bg-red-700 duration-150;
+}

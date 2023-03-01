@@ -37,6 +37,9 @@ const App = ({ options }) => {
 	const [baseExpenses, setBaseExpenses] = useState(0); // in billion
 	const [happiness, rawSetHappiness] = useState(1000);
 	const [infrastructureExpenses, setInfrastructureExpenses] = useState(0); // in billion
+	const [hasIncreaseGST, setHasIncreaseGST] = useState(false);
+	const [hasIncreasePropertyTax, setHasIncreasedPropertyTax] = useState(false);
+	const [hasIncreaseAlcoholTax, setHasIncreasedAlcoholTax] = useState(false);
 	// wrapper for setHappiness to prevent it from going either below 0 or over 1000
 	// take note of the fact that some pass in functions
 	const setHappiness = (newHappiness) => {
@@ -72,6 +75,7 @@ const App = ({ options }) => {
 	]); // in points
 	const [gameOverStatus, setGameOverStatus] = useState(false);
 	const [has2BeenChosen, setHas2BeenChosen] = useState(false);
+	const [hasSoldBonds, setHasSoldBonds] = useState(false);
 
 	const gameOver = () => {
 		setGameOverStatus(true);
@@ -83,9 +87,10 @@ const App = ({ options }) => {
 
 	const setGDPAndRevenue = (year) => {
 		if (year.getFullYear() > 2023) return;
-		// only run on the first day of the year
 
+		// only run on the first day of the year
 		if (year.getDate() === 1 && year.getMonth() === 0) {
+			setHasSoldBonds(false);
 			setGDP(valueMap[year.getFullYear()]?.GDP);
 			setRevenue(valueMap[year.getFullYear()]?.revenue);
 			setBaseRevenue((preBaseRevenue => preBaseRevenue + (valueMap[year.getFullYear() - 1]?.revenue ?? 0)));
@@ -121,6 +126,60 @@ const App = ({ options }) => {
 		setInfrastructureExpenses((preExpenses) => preExpenses + 100);
 	};
 
+	const sellBonds = () => {
+		// raises revenue by 90 billion
+		setActivityLog((preActivityLog) => ['Sold bonds!', ...preActivityLog]);
+		setRevenue((preRevenue) => preRevenue + 90);
+		// raise happiness by 1%
+		setHappiness((preHappiness) => increaseNumberbyXPercent(preHappiness, 1));
+	};
+
+	const increaseGST = () => {
+		setHasIncreaseGST(true);
+		// increase revenue by 10 billion
+		setActivityLog((preActivityLog) => ['Increased GST!', ...preActivityLog]);
+
+		// increase revenue by 10 million for all following years
+		const year = date.getFullYear();
+		for (let i = year; i <= 2023; i++) {
+			valueMap[i].revenue += 10;
+		}
+
+		// decrease happiness by 1%
+		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 1));
+	};
+
+	const increasePropertyTax = () => {
+		setHasIncreasedPropertyTax(true);
+		// increase revenue by 10 billion
+		setActivityLog((preActivityLog) => ['Increased property tax!', ...preActivityLog]);
+
+		// increase revenue by 10 million for all following years
+		const year = date.getFullYear();
+		for (let i = year; i <= 2023; i++) {
+			valueMap[i].revenue += 10;
+		}
+
+		// decrease happiness by 1%
+		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 1));
+	};
+
+	const increaseAlcoholTax = () => {
+		setHasIncreasedAlcoholTax(true);
+		// increase revenue by 10 billion
+		setActivityLog((preActivityLog) => ['Increased alcohol and tobacco tax!', ...preActivityLog]);
+
+		// increase revenue by 10 million for all following years
+		const year = date.getFullYear();
+
+		for (let i = year; i <= 2023; i++) {
+			valueMap[i].revenue += 4;
+		}
+
+		// decrease happiness by 1%
+		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 1));
+	};
+
 
 	// increase day by one every 300ms
 	useEffect(() => {
@@ -144,7 +203,10 @@ const App = ({ options }) => {
 
 			// covid strikes on 2020-01-23, happiness decreases by a random 18-24%
 			if (date.getFullYear() === 2020 && date.getMonth() === 0 && date.getDate() === 23) {
-				setActivityLog((preActivityLog) => ['Covid strikes!', ...preActivityLog]);
+				setActivityLog((preActivityLog) => [
+					// eslint-disable-next-line react/jsx-key
+					<span className='text-red-500'>COVID strikes!</span>,
+					...preActivityLog]);
 				// decrease happiness by 26-32%
 				setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, Math.floor(Math.random() * 6 + 22)));
 				// decrease GDP by 10%
@@ -234,9 +296,7 @@ const App = ({ options }) => {
 					Your score is {score}
 				</p>
 				<p>
-					{
-						// SHA-256 of score
-						// eslint-disable-next-line max-len
+					Verification code: {
 						sha256(sha256('' + score).toString()).toString()
 					}
 				</p>
@@ -332,7 +392,7 @@ const App = ({ options }) => {
 								</div>
 								<div className=''>
 									{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && <button
-										className='text-white bg-red-600 p-5 rounded-lg'
+										className='action'
 										onClick={() => {
 											giveReliefFunds();
 										}}
@@ -341,9 +401,42 @@ const App = ({ options }) => {
 											// add buttons to give funds and subsidies
 												'Provide relief measures like relief funds, GST vouchers and worker wage subsidies 💸'
 											) : (
-												'Provide subsidies like subsidising BTO for 1st time buyers, baby bonuses, and car taxes and tobacco tax 💸'
+												'Provide subsidies like subsidising BTO for 1st time buyers, and car taxes 💸'
 											)
 										} (cost: 100 billion)
+									</button>}
+									{(date.getFullYear() >= 2020 && !hasSoldBonds) && <button
+										className='action'
+										onClick={() => {
+											sellBonds();
+											setHasSoldBonds(true);
+										}}
+									>
+										Sell bonds (revenue: 90 billion)
+									</button>}
+									{(date.getFullYear() >= 2020 && !hasIncreaseGST) && <button
+										className='action'
+										onClick={() => {
+											increaseGST();
+										}}
+									>
+										Increase GST (revenue: 10 billion)
+									</button>}
+									{(date.getFullYear() >= 2020 && !hasIncreasePropertyTax) && <button
+										className='action'
+										onClick={() => {
+											increasePropertyTax();
+										}}
+									>
+										Increase property tax (revenue: 10 billion)
+									</button>}
+									{(date.getFullYear() >= 2020 && !hasIncreaseAlcoholTax) && <button
+										className='action'
+										onClick={() => {
+											increaseAlcoholTax();
+										}}
+									>
+										Increase alcohol tax (revenue: 4 billion)
 									</button>}
 								</div>
 							</div>
