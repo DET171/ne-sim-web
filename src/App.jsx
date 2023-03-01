@@ -315,10 +315,6 @@ const App = ({ options }) => {
 						<p>
 							<h1 className='text-5xl text-center font-tilt-warp font-bold'>NE Country Sim</h1>
 
-							<br />
-							<br />
-							<br />
-
 							Date: {date.toLocaleString('en-us', {
 								month: 'long',
 								day: 'numeric',
