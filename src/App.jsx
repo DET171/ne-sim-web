@@ -292,7 +292,7 @@ const App = ({ options }) => {
 	if (gameOverStatus) {
 		const score = Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10);
 		return (
-			<div className='p-10 w-4/5 m-auto'>
+			<div className='p-10 w-4/5 mx-5 m-auto'>
 				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
 				<br />
 				<p>
