@@ -248,16 +248,18 @@ const App = ({ options }) => {
 								<div className='w-full h-5 bg-gray-300 rounded-lg'>
 									<div
 										className='w-full h-5 rounded-lg'
+										// move the number into the bar
 										style={{
 											backgroundColor: happiness > 700 ? 'green' : 'red',
 											width: `${Math.floor(happiness / 10)}%`,
 											transitionDuration: '1s',
+
 										}}
 									/>
 									{/* show happiness in the bar */}
-									<div className='absolute text-white text-xs font-bold w-full text-center top-[-5]'>
+									<p className='absolute text-white text-xs font-bold w-full text-center top-[-5]'>
 										{Math.floor(happiness)}/1000
-									</div>
+									</p>
 								</div>
 							</div>
 
@@ -285,19 +287,25 @@ const App = ({ options }) => {
 					</div>
 					<div>
 						<p>
-							<br />
-							Choose your action:
-							<br />
 							{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && (
 								<>
-									<br />
-									1. {
+									<button
+										className='text-white bg-red-700'
+										onClick={() => {
+											giveReliefFunds();
+										}}
+									>{
 										date.getFullYear() !== 2023 ? (
+											//add buttons to give funds and subsidies
+
+											
 											'Provide relief measures like relief funds, GST vouchers and worker wage subsidies'
 										) : (
 											'Provide subsidies like subsidising BTO for 1st time buyers, baby bonuses, and car taxes and tobacco tax'
 										)
 									} (cost: 100 billion)
+									</button>
+
 								</>
 							)}
 						</p>
