@@ -319,8 +319,8 @@ const App = ({ options }) => {
 								<p className='mt-7'>Days since start of year: {daysSinceStartOfYear}</p>
 							</div>
 
-							<div className='columns-2 mt-7 h-screen'>
-								<div className='w-1/2 h-full'>
+							<div className='grid grid-cols-2 mt-7 h-screen'>
+								<div className=''>
 									<h3 className='text-xl font-bold'>Event/Activity logs</h3>
 									{activityLog
 										.slice(0, 5)
@@ -329,7 +329,7 @@ const App = ({ options }) => {
 										))}
 
 								</div>
-								<div>
+								<div className=''>
 									{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && <button
 										className='text-white bg-red-600 p-5 rounded-lg'
 										onClick={() => {
