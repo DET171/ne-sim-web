@@ -9,6 +9,7 @@ module.exports = {
 		fontFamily: {
 			'tilt-warp': ['"Tilt Warp"', 'cursive'],
 			'golos-text': ['"Golos Text"', 'sans-serif'],
+			'quicksand': ['"Quicksand"', 'sans-serif'],
 		},
 	},
 	plugins: [],
