@@ -190,6 +190,11 @@ const App = ({ options }) => {
 		const interval = setInterval(() => {
 			setGDPAndRevenue(date);
 
+			if (gameOverStatus) {
+				clearInterval(interval);
+				return;
+			}
+
 			// budget deficit event on 2019-06-26, decrease happiness by a random 12-15%
 			if (date.getFullYear() === 2019 && date.getMonth() === 10 && date.getDate() === 26) {
 				setActivityLog((preActivityLog) => ['Budget deficit!', ...preActivityLog]);
@@ -279,6 +284,7 @@ const App = ({ options }) => {
 	const daysSinceStartOfYear = (+new Date(date) - +new Date(date.getFullYear(), 0, 1)) / (1000 * 60 * 60 * 24);
 
 	if (happiness < 500) {
+
 		return (
 			<div className='p-10 w-4/5 m-auto'>
 				<h1 className='text-5xl text-center font-bold'>Game Over</h1>
@@ -293,8 +299,8 @@ const App = ({ options }) => {
 	if (gameOverStatus) {
 		const score = Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10);
 		return (
-			<div className='p-10 w-4/5 mx-5 m-auto text-center'>
-				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
+			<div className='p-10 w-4/5 m-auto text-center bg-purple-200 mt-10 rounded-3xl'>
+				<h1 className='text-4xl text-center font-bold'>Game Over</h1>
 				<br />
 				<h2>
 					Your score is {score}
