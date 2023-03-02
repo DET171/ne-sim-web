@@ -117,12 +117,12 @@ const App = ({ options }) => {
 	const giveReliefFunds = () => {
 		// give 100 billion in relief funds
 		setActivityLog((preActivityLog) => ['Gave 100 billion in relief funds!', ...preActivityLog]);
-		// increase happiness by 20%
+		// increase happiness by 100 and then decrease by 5% (happiness increases less when the bar is full-er)
 		// eslint-disable-next-line no-shadow
 		// setHappiness((happiness) => happiness += 100);
 
 		setHappiness((preHappiness) => {
-			return increaseNumberbyXPercent(preHappiness, 15);
+			return decreaseNumberbyXPercent(preHappiness+100, 5);
 		});
 
 		// increase infrastructure expenses by 100 billion
@@ -130,49 +130,49 @@ const App = ({ options }) => {
 	};
 
 	const sellBonds = () => {
-		// raises revenue by 90 billion
+		// raises revenue by 80 billion
 		setActivityLog((preActivityLog) => ['Sold bonds!', ...preActivityLog]);
-		setRevenue((preRevenue) => preRevenue + 90);
+		setRevenue((preRevenue) => preRevenue + 80);
 		// raise happiness by 1%
 		setHappiness((preHappiness) => increaseNumberbyXPercent(preHappiness, 1));
 	};
 
 	const increaseGST = () => {
 		setHasIncreaseGST(true);
-		// increase revenue by 10 billion
+		// increase revenue by 30 billion
 		setActivityLog((preActivityLog) => ['Increased GST!', ...preActivityLog]);
-
+		setRevenue((preRevenue) => preRevenue + 30);
 		// increase revenue by 10 million for all following years
 		const year = date.getFullYear();
 		for (let i = year; i <= 2023; i++) {
 			valueMap[i].revenue += 10;
 		}
 
-		// decrease happiness by 2%
-		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 1));
+		// decrease happiness by 6%
+		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 6));
 	};
 
 	const increasePropertyTax = () => {
 		setHasIncreasedPropertyTax(true);
-		// increase revenue by 10 billion
+		// increase revenue by 20 billion
 		setActivityLog((preActivityLog) => ['Increased property tax!', ...preActivityLog]);
-
+		setRevenue((preRevenue) => preRevenue + 20);
 		// increase revenue by 10 million for all following years
 		const year = date.getFullYear();
 		for (let i = year; i <= 2023; i++) {
 			valueMap[i].revenue += 10;
 		}
 
-		// decrease happiness by 2%
-		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 2));
+		// decrease happiness by 5%
+		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 5));
 	};
 
 	const increaseAlcoholTax = () => {
 		setHasIncreasedAlcoholTax(true);
 		// increase revenue by 10 billion
 		setActivityLog((preActivityLog) => ['Increased alcohol and tobacco tax!', ...preActivityLog]);
-
-		// increase revenue by 10 million for all following years
+		setRevenue((preRevenue) => preRevenue + 10);
+		// increase revenue by 4 million for all following years
 		const year = date.getFullYear();
 
 		for (let i = year; i <= 2023; i++) {
@@ -184,7 +184,7 @@ const App = ({ options }) => {
 	};
 
 
-	// increase day by one every 300ms
+	// increase day by one every 100ms
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setGDPAndRevenue(date);
@@ -270,7 +270,7 @@ const App = ({ options }) => {
 				newDate.setDate(newDate.getDate() + 1);
 				return newDate;
 			});
-		}, 100);
+		}, 100); // change back to 100ms after testing
 		return () => clearInterval(interval);
 	});
 
@@ -300,7 +300,7 @@ const App = ({ options }) => {
 				</h2>
 				<p>
 					Verification code: {
-						sha256(sha256('' + score).toString()).toString()
+						sha256(sha256(sha256('' + score).toString()).toString()).toString()
 					}
 				</p>
 			</div>
@@ -413,7 +413,7 @@ const App = ({ options }) => {
 											setHasSoldBonds(true);
 										}}
 									>
-										Sell bonds (revenue: 90 billion)
+										Sell bonds (revenue: 80 billion)
 									</button>}
 									{(date.getFullYear() >= 2020 && !hasIncreaseGST) && <button
 										className='action'
@@ -421,7 +421,7 @@ const App = ({ options }) => {
 											increaseGST();
 										}}
 									>
-										Increase GST (revenue: 10 billion)
+										Increase GST (revenue: 30 billion)
 									</button>}
 									{(date.getFullYear() >= 2020 && !hasIncreasePropertyTax) && <button
 										className='action'
@@ -429,7 +429,7 @@ const App = ({ options }) => {
 											increasePropertyTax();
 										}}
 									>
-										Increase property tax (revenue: 10 billion)
+										Increase property tax (revenue: 20 billion)
 									</button>}
 									{(date.getFullYear() >= 2020 && !hasIncreaseAlcoholTax) && <button
 										className='action'
@@ -437,7 +437,7 @@ const App = ({ options }) => {
 											increaseAlcoholTax();
 										}}
 									>
-										Increase alcohol tax (revenue: 4 billion)
+										Increase alcohol tax (revenue: 10 billion)
 									</button>}
 								</div>
 							</div>
@@ -457,3 +457,13 @@ const App = ({ options }) => {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+// 469 lines for the memes
