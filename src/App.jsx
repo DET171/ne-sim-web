@@ -319,7 +319,7 @@ const App = ({ options }) => {
 			{
 				!gameOverStatus && <>
 					<div className='p-10 w-4/5 mx-auto -mt-16'>
-						<div className='p-10 bg-amber-400 rounded-2xl'>
+						<div className='p-10 bg-[#d4afb9] rounded-2xl'>
 							<h1 className='text-5xl text-center font-tilt-warp font-bold'>NE Country Sim</h1>
 
 							Date: {date.toLocaleString('en-us', {
@@ -349,7 +349,7 @@ const App = ({ options }) => {
 							</div>
 						</div>
 
-						<div className='mt-5 bg-sky-400 p-10 rounded-3xl'>
+						<div className='mt-5 bg-[#d1cfe2] p-10 rounded-3xl'>
 							<div>
 								<table className='w-full'>
 									<tr>
@@ -391,7 +391,7 @@ const App = ({ options }) => {
 						<div>
 
 							<div className='grid grid-cols-2 mt-7'>
-								<div className='rounded-3xl bg-violet-400 p-10 mr-5'>
+								<div className='rounded-3xl bg-[#9cadce] p-10 mr-5'>
 									<h3 className='text-2xl font-tilt-warp'>Event/Activity logs</h3>
 									{activityLog
 										.slice(0, 5)
@@ -400,7 +400,7 @@ const App = ({ options }) => {
 										))}
 
 								</div>
-								<div className='rounded-3xl bg-fuchsia-400 p-10'>
+								<div className='rounded-3xl bg-[#7ec4cf] p-10'>
 									{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && <button
 										className='action'
 										onClick={() => {
