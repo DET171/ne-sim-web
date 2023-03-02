@@ -31,6 +31,8 @@ const App = ({ options }) => {
 			expenses: 104.15,
 		},
 	};
+	// start date: 2019-01-01
+	const [date, setDate] = useState(new Date(2019, 6, 1));
 	const [GDP, setGDP] = useState(0); // in billion
 	const [revenue, setRevenue] = useState(0); // in billion
 	const [baseRevenue, setBaseRevenue] = useState(0); // in billion
@@ -78,6 +80,9 @@ const App = ({ options }) => {
 	const [gameOverStatus, setGameOverStatus] = useState(false);
 	const [has2BeenChosen, setHas2BeenChosen] = useState(false);
 	const [hasSoldBonds, setHasSoldBonds] = useState(false);
+	const daysSinceStartOfYear = (+new Date(date) - +new Date(date.getFullYear(), 0, 1)) / (1000 * 60 * 60 * 24);
+	const net = +((+(revenue / 365 * daysSinceStartOfYear) + baseRevenue) - (+(expenses / 365 * daysSinceStartOfYear) + baseExpenses + infrastructureExpenses));
+
 
 	const gameOver = () => {
 		setGameOverStatus(true);
@@ -109,9 +114,6 @@ const App = ({ options }) => {
 	const increaseNumberbyXPercent = (number, percent) => {
 		return number * (1 + (percent / 100));
 	};
-
-	// start date: 2019-01-01
-	const [date, setDate] = useState(new Date(2019, 6, 1));
 
 
 	const giveReliefFunds = () => {
@@ -189,6 +191,11 @@ const App = ({ options }) => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setGDPAndRevenue(date);
+
+			// if you're in deeper debt than 500 billion, you lose
+			if (net < -500) {
+				setGameOverStatus(true);
+			}
 
 			if (gameOverStatus) {
 				clearInterval(interval);
@@ -281,16 +288,26 @@ const App = ({ options }) => {
 	});
 
 
-	const daysSinceStartOfYear = (+new Date(date) - +new Date(date.getFullYear(), 0, 1)) / (1000 * 60 * 60 * 24);
-
 	if (happiness < 500) {
-
 		return (
 			<div className='p-10 w-4/5 m-auto mt-10 bg-yellow-300 rounded-3xl text-center'>
 				<h1 className='text-5xl text-center font-bold'>Game Over</h1>
 				<br />
 				<h2>
 					Your happiness is too low! You have been overthrown!
+				</h2>
+			</div>
+		);
+	}
+
+
+	if (net < -500) {
+		return (
+			<div className='p-10 w-4/5 m-auto mt-10 bg-yellow-300 rounded-3xl text-center'>
+				<h1 className='text-5xl text-center font-bold'>Game Over</h1>
+				<br />
+				<h2>
+					You are in too much debt! You have been overthrown!
 				</h2>
 			</div>
 		);
@@ -400,7 +417,7 @@ const App = ({ options }) => {
 										))}
 
 								</div>
-								<div className='rounded-3xl bg-[#7ec4cf] p-10'>
+								<div className='rounded-3xl bg-[#7ec4cf] p-10 pt-5'>
 									{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && <button
 										className='action'
 										onClick={() => {
