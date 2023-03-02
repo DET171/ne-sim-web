@@ -16,9 +16,8 @@ function Credits() {
 				<Modal.Content>
 					<Modal.Description>
 						<p>
-							Game made by EC<sup>3</sup>, specifically Du Yuancheng and Darryl Shi (both 2i2)
-							<br></br>
-							We don't talk about An Yi
+							Game made by EC<sup>3</sup>, specifically Du Yuancheng (2i2), Darryl Shi (2i2) and Yang An Yi (4A3)
+							
 
 
 							<br></br>
