@@ -111,7 +111,7 @@ const App = ({ options }) => {
 	};
 
 	// start date: 2019-01-01
-	const [date, setDate] = useState(new Date(2023, 6, 1));
+	const [date, setDate] = useState(new Date(2019, 6, 1));
 
 
 	const giveReliefFunds = () => {
@@ -122,7 +122,7 @@ const App = ({ options }) => {
 		// setHappiness((happiness) => happiness += 100);
 
 		setHappiness((preHappiness) => {
-			return decreaseNumberbyXPercent(preHappiness+100, 5);
+			return decreaseNumberbyXPercent(preHappiness + 100, 5);
 		});
 
 		// increase infrastructure expenses by 100 billion
@@ -464,13 +464,6 @@ const App = ({ options }) => {
 };
 
 export default App;
-
-
-
-
-
-
-
 
 
 // 469 lines for the memes
