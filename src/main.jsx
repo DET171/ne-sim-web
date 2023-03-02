@@ -7,9 +7,10 @@ import Credits from './Credits';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<>
+		<div className='scale-[0.82]'>
 			<App />
-			<Credits />
-		</>
+		</div>
+
+		<Credits />
 	</React.StrictMode>,
 );

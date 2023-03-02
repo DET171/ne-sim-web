@@ -17,9 +17,6 @@ function Credits() {
 					<Modal.Description>
 						<p>
 							Game made by EC<sup>3</sup>, specifically Du Yuancheng (2i2), Darryl Shi (2i2) and Yang An Yi (4A3)
-							
-
-
 							<br></br>
 							<br></br>
 							Commissioned by the NE Council

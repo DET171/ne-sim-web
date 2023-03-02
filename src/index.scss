@@ -12,7 +12,7 @@ button {
 }
 
 table, tr, td, th {
-	@apply border-collapse border border-gray-500;
+	@apply border-collapse border border-gray-500 text-center;
 	padding: 8px;
 }
 

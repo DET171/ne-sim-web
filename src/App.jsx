@@ -286,7 +286,7 @@ const App = ({ options }) => {
 	if (happiness < 500) {
 
 		return (
-			<div className='p-10 w-4/5 m-auto'>
+			<div className='p-10 w-4/5 m-auto mt-10 bg-yellow-300 rounded-3xl text-center'>
 				<h1 className='text-5xl text-center font-bold'>Game Over</h1>
 				<br />
 				<h2>
@@ -299,7 +299,7 @@ const App = ({ options }) => {
 	if (gameOverStatus) {
 		const score = Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10);
 		return (
-			<div className='p-10 w-4/5 mx-auto text-center bg-purple-200 mt-10 rounded-3xl'>
+			<div className='p-10 w-4/5 mx-auto text-center bg-purple-200 rounded-3xl'>
 				<h1 className='text-4xl text-center font-bold'>Game Over</h1>
 				<br />
 				<h2>
@@ -318,8 +318,8 @@ const App = ({ options }) => {
 		<>
 			{
 				!gameOverStatus && <>
-					<div className='p-10 w-4/5 m-auto bg-yellow-200 min-h-screen'>
-						<p>
+					<div className='p-10 w-4/5 mx-auto -mt-16'>
+						<div className='p-10 bg-amber-400 rounded-2xl'>
 							<h1 className='text-5xl text-center font-tilt-warp font-bold'>NE Country Sim</h1>
 
 							Date: {date.toLocaleString('en-us', {
@@ -347,9 +347,9 @@ const App = ({ options }) => {
 									<p className='relative -top-7 w-full text-center text-white'>Happiness: {Math.round(happiness)}/1000</p>
 								</div>
 							</div>
-						</p>
+						</div>
 
-						<div className='mt-5'>
+						<div className='mt-5 bg-sky-400 p-10 rounded-3xl'>
 							<div>
 								<table className='w-full'>
 									<tr>
@@ -387,9 +387,11 @@ const App = ({ options }) => {
 								</table>
 								<p className='mt-7'>Days since start of year: {daysSinceStartOfYear}</p>
 							</div>
+						</div>
+						<div>
 
 							<div className='grid grid-cols-2 mt-7'>
-								<div className=''>
+								<div className='rounded-3xl bg-violet-400 p-10 mr-5'>
 									<h3 className='text-2xl font-tilt-warp'>Event/Activity logs</h3>
 									{activityLog
 										.slice(0, 5)
@@ -398,7 +400,7 @@ const App = ({ options }) => {
 										))}
 
 								</div>
-								<div className=''>
+								<div className='rounded-3xl bg-fuchsia-400 p-10'>
 									{(date.getFullYear() >= 2020 && date.getMonth() >= 1) && <button
 										className='action'
 										onClick={() => {
