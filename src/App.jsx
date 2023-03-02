@@ -111,7 +111,7 @@ const App = ({ options }) => {
 	};
 
 	// start date: 2019-01-01
-	const [date, setDate] = useState(new Date(2019, 6, 1));
+	const [date, setDate] = useState(new Date(2023, 6, 1));
 
 
 	const giveReliefFunds = () => {
@@ -299,7 +299,7 @@ const App = ({ options }) => {
 	if (gameOverStatus) {
 		const score = Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10);
 		return (
-			<div className='p-10 w-4/5 m-auto text-center bg-purple-200 mt-10 rounded-3xl'>
+			<div className='p-10 w-4/5 mx-auto text-center bg-purple-200 mt-10 rounded-3xl'>
 				<h1 className='text-4xl text-center font-bold'>Game Over</h1>
 				<br />
 				<h2>
