@@ -149,7 +149,7 @@ const App = ({ options }) => {
 			valueMap[i].revenue += 10;
 		}
 
-		// decrease happiness by 1%
+		// decrease happiness by 2%
 		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 1));
 	};
 
@@ -164,8 +164,8 @@ const App = ({ options }) => {
 			valueMap[i].revenue += 10;
 		}
 
-		// decrease happiness by 1%
-		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 1));
+		// decrease happiness by 2%
+		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 2));
 	};
 
 	const increaseAlcoholTax = () => {
@@ -180,8 +180,8 @@ const App = ({ options }) => {
 			valueMap[i].revenue += 4;
 		}
 
-		// decrease happiness by 1%
-		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 1));
+		// decrease happiness by 2%
+		setHappiness((preHappiness) => decreaseNumberbyXPercent(preHappiness, 2));
 	};
 
 
@@ -281,11 +281,11 @@ const App = ({ options }) => {
 	if (happiness < 500) {
 		return (
 			<div className='p-10 w-4/5 m-auto'>
-				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
+				<h1 className='text-5xl text-center font-bold'>Game Over</h1>
 				<br />
-				<p>
+				<h2>
 					Your happiness is too low! You have been overthrown!
-				</p>
+				</h2>
 			</div>
 		);
 	}
@@ -293,12 +293,12 @@ const App = ({ options }) => {
 	if (gameOverStatus) {
 		const score = Math.round(happiness / 10 + GDP / 10 + (revenue + baseRevenue) / 10 - (expenses + baseExpenses) / 10 - infrastructureExpenses / 10);
 		return (
-			<div className='p-10 w-4/5 m-auto text-center'>
-				<h1 className='text-2xl font-bold'>Game Over</h1>
+			<div className='p-10 w-4/5 mx-5 m-auto text-center'>
+				<h1 className='text-2xl text-center font-bold'>Game Over</h1>
 				<br />
-				<p>
+				<h2>
 					Your score is {score}
-				</p>
+				</h2>
 				<p>
 					Verification code: {
 						sha256(sha256('' + score).toString()).toString()
