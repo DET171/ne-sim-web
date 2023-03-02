@@ -339,16 +339,16 @@ const App = ({ options }) => {
 						<div className='p-10 bg-[#d4afb9] rounded-2xl'>
 							<h1 className='text-5xl text-center font-tilt-warp font-bold'>NE Country Sim</h1>
 
-							Date: {date.toLocaleString('en-us', {
+							<p className='text-2xl'>Date: {date.toLocaleString('en-us', {
 								month: 'long',
 								day: 'numeric',
 								year: 'numeric',
-							})}
+							})}</p>
 
 							<br />
 
 							{/* port the above to a div with a coloured background */}
-							<div className='mt-5'>
+							<div className='-mt-5'>
 								<div className='w-full h-8 bg-gray-300 rounded-lg'>
 									<div
 										// position the bar 10px above
