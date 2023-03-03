@@ -466,7 +466,7 @@ const App = ({ options }) => {
 										Increase alcohol tax (revenue: 10 billion)
 									</button>}
 								</div>
-							</div>
+							</div> {/* 469 lines */}
 						</div>
 
 
@@ -483,6 +483,3 @@ const App = ({ options }) => {
 };
 
 export default App;
-
-
-// 469 lines for the memes
